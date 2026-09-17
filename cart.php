@@ -1,9 +1,9 @@
 <?php
 
-require_once _DIR_ . '/bootstrap.php';
-require_once _DIR_ . '/functions.php';
+require_once __DIR__ . '/bootstrap.php';
+require_once __DIR__ . '/functions.php';
 
-$products = require _DIR_ . '/data/products.php';
+$products = require __DIR__ . '/data/products.php';
 $flash = pullFlash();
 
 $cart = $_SESSION['cart'];
@@ -19,6 +19,8 @@ $total = 0;
     <title>Keranjang</title>
 </head>
 <body>
+
+ <?php require __DIR__ . '/components/header.php'; ?>
 
     <h1>Keranjang Belanja</h1>
 
@@ -69,6 +71,8 @@ $total = 0;
     <?php endif; ?>
 
     <a href="index.php">Kembali ke Katalog</a>
+    <?php require __DIR__ . '/components/footer.php'; ?>
+
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
-require_once _DIR_ . '/bootstrap.php';
-require_once _DIR_ . '/functions.php';
+require_once __DIR__ . '/bootstrap.php';
+require_once __DIR__. '/functions.php';
 $allowedThemes = ['light', 'dark'];
 
 $theme = $_COOKIE['theme'] ?? 'light';
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['theme'])) {
     }
 }
 
-$products = require _DIR_ . '/data/products.php';
+$products = require __DIR__ . '/data/products.php';
 $flash = pullFlash();
 ?>
 
@@ -37,6 +37,7 @@ $flash = pullFlash();
     <title>Katalog Produk</title>
 </head>
 <body>
+    <?php require __DIR__ . '/components/header.php'; ?>
 
     <h1>Katalog Produk</h1>
     <form method="post">
@@ -71,6 +72,7 @@ $flash = pullFlash();
     <?php endforeach; ?>
 
     <a href="cart.php">Lihat Keranjang</a>
+    <?php require __DIR__ . '/components/footer.php'; ?>
 
 </body>
 </html>
