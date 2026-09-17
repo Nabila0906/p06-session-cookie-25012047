@@ -12,6 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $action = $_POST['action'] ?? '';
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+if ($id === false || $id === null) {
+    $id = 0;
+}
 
 if ($action === 'add' && $id !== false && isset($products[$id])) {
     $_SESSION['cart'][$id] = ($_SESSION['cart'][$id] ?? 0) + 1;
