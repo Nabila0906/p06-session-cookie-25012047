@@ -1,6 +1,29 @@
 <?php
 require_once _DIR_ . '/bootstrap.php';
 require_once _DIR_ . '/functions.php';
+$allowedThemes = ['light', 'dark'];
+
+$theme = $_COOKIE['theme'] ?? 'light';
+
+if (!in_array($theme, $allowedThemes, true)) {
+    $theme = 'light';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['theme'])) {
+    $candidate = $_POST['theme'];
+
+    if (in_array($candidate, $allowedThemes, true)) {
+        setcookie('theme', $candidate, [
+            'expires' => time() + 60 * 60 * 24 * 30,
+            'path' => '/',
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ]);
+
+        header('Location: index.php');
+        exit;
+    }
+}
 
 $products = require _DIR_ . '/data/products.php';
 $flash = pullFlash();
@@ -16,6 +39,16 @@ $flash = pullFlash();
 <body>
 
     <h1>Katalog Produk</h1>
+    <form method="post">
+    <label for="theme">Tema:</label>
+
+    <select name="theme" id="theme">
+        <option value="light" <?= $theme === 'light' ? 'selected' : '' ?>>Light</option>
+        <option value="dark" <?= $theme === 'dark' ? 'selected' : '' ?>>Dark</option>
+    </select>
+
+    <button type="submit">Simpan Tema</button>
+</form>
 
     <?php if ($flash): ?>
         <p><?= e($flash) ?></p>
