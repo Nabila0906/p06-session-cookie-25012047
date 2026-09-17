@@ -49,6 +49,11 @@ $total = 0;
                 <p>Harga: Rp<?= number_format($product['harga'], 0, ',', '.') ?></p>
                 <p>Jumlah: <?= $quantity ?></p>
                 <p>Subtotal: Rp<?= number_format($subtotal, 0, ',', '.') ?></p>
+                <form action="actions.php" method="post">
+    <input type="hidden" name="action" value="remove">
+    <input type="hidden" name="id" value="<?= $id ?>">
+    <button type="submit">Hapus</button>
+</form>
             </div>
 
             <hr>
@@ -56,6 +61,10 @@ $total = 0;
         <?php endforeach; ?>
 
         <h2>Total: Rp<?= number_format($total, 0, ',', '.') ?></h2>
+        <form action="actions.php" method="post">
+    <input type="hidden" name="action" value="clear">
+    <button type="submit">Kosongkan Keranjang</button>
+</form>
 
     <?php endif; ?>
 
